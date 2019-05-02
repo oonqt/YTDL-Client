@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>YTDL</title>
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>YouTube Video Downloader</h1>
+
+        <form id="convert-form">
+            <div class="row">
+                <div class="nine columns">
+                    <label for="video">Video URL</label>
+                    <input type="url" class="u-full-width" placeholder="https://www.youtube.com/watch?v=39SeLFDIiTo" id="video">
+                </div>
+                <div class="three columns">
+                    <label for="format">Format</label>
+                    <select id="format" class="u-full-width">
+                        <option value="mp3">MP3</option>
+                        <option value="mp4">MP4</option>
+                    </select>
+                </div>
+            </div>
+            <input type="submit" value="Convert + Download" class="button-primary u-full-width">
+        </form>
+    </div>
+    <script src="js/dl.js"></script>
+    <script src="js/downloader.js"></script>
+</body>
+</html>
