@@ -33,21 +33,21 @@ class UI {
         setTimeout(() => {
             document.querySelector(".alert").remove();
         }, 3500);
-        console.log("err");
     }
 }
 
-
 const form = document.getElementById("convert-form");
+let startedConverting = false;
 
 form.addEventListener("submit", (e) => {
     const video = document.getElementById("video").value;
     const format = document.getElementById("format").value;
     const url = `https://memester.cf/api/convert?url=${video}&format=${format}`;
-    let isConverting = false;
 
     if(video === "") {
         UI.showError("You must provide a YouTube video");
+    } else if(startedConverting === true) { 
+        UI.showError("You are already converting a video! Wait until this video finishes converting before starting another.");
     } else {
         const req = new XMLHttpRequest();
 
@@ -56,12 +56,13 @@ form.addEventListener("submit", (e) => {
         req.onreadystatechange = function() {
             if(this.status === 400 && this.readyState === 4) {
                 UI.showError("Invalid or private YouTube video");
-            } else if (this.status === 200 && this.readyState === 3 && isConverting === false) {
-                UI.showMessage("Converting");
-                isConverting = true;
+            } else if (this.status === 200 && this.readyState === 3 && startedConverting === false) {
+                UI.showMessage("Started Converting");
+                startedConverting = true;
             } else if (this.status === 200 && this.readyState === 4) {
                 UI.showMessage("Downloading");
                 download(this.response);
+                startedConverting = false;
             }
         }
 
