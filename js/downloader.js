@@ -14,7 +14,7 @@ class UI {
     
         setTimeout(() => {
             document.querySelector(".alert").remove();
-        }, 3500);
+        }, 2500);
     }
 
     static showMessage(message) {
@@ -33,6 +33,12 @@ class UI {
         setTimeout(() => {
             document.querySelector(".alert").remove();
         }, 3500);
+    }
+
+    static loading(status) {
+        const loadingBar = document.getElementById("loadingBar");
+
+        loadingBar.hidden = !status;
     }
 }
 
@@ -58,9 +64,11 @@ form.addEventListener("submit", (e) => {
                 UI.showError("Invalid or private YouTube video");
             } else if (this.status === 200 && this.readyState === 3 && startedConverting === false) {
                 UI.showMessage("Started Converting");
+                UI.loading(true);
                 startedConverting = true;
             } else if (this.status === 200 && this.readyState === 4) {
                 UI.showMessage("Downloading");
+                UI.loading(false);
                 download(this.response);
                 startedConverting = false;
             }
