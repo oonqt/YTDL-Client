@@ -50,10 +50,11 @@ input[type="submit"] {
     padding: 6px;
     margin: 5px 0 15px 0;
     border-radius: 4px 4px 4px 4px;
+    font-weight: 550;
 }
 
 .success {
-    background: #40d31b;
+    background: #52ae66;
 }
 
 .error {

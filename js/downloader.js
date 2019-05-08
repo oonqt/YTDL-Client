@@ -46,36 +46,7 @@ const form = document.getElementById("convert-form");
 let startedConverting = false;
 
 form.addEventListener("submit", (e) => {
-    const video = document.getElementById("video").value;
-    const format = document.getElementById("format").value;
-    const url = `https://memester.cf/api/convert?url=${video}&format=${format}`;
-
-    if(video === "") {
-        UI.showError("You must provide a YouTube video");
-    } else if(startedConverting === true) { 
-        UI.showError("You are already converting a video! Wait until this video finishes converting before starting another.");
-    } else {
-        const req = new XMLHttpRequest();
-
-        req.open("GET", url, true);
-        
-        req.onreadystatechange = function() {
-            if(this.status === 400 && this.readyState === 4) {
-                UI.showError("Invalid or private YouTube video");
-            } else if (this.status === 200 && this.readyState === 3 && startedConverting === false) {
-                UI.showMessage("Started Converting");
-                UI.loading(true);
-                startedConverting = true;
-            } else if (this.status === 200 && this.readyState === 4) {
-                UI.showMessage("Downloading");
-                UI.loading(false);
-                download(this.response);
-                startedConverting = false;
-            }
-        }
-
-        req.send();
-    }
+    
 
     e.preventDefault();
 });
